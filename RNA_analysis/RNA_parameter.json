@@ -1,0 +1,14 @@
+{
+  "barcode_read": "/path/to/sample_R2.trim.fastq.gz",
+  "transcript_read": "/path/to/sample_R1.trim.fastq.gz",
+  "barcode_file": "/path/to/spatial_barcodes.txt",
+  "PrimerStructure": "NA",
+  "StructureUMI": "CAAGCGTTGGCTTCTCGCATCT_10",
+  "StructureBarcode": "8_ATCCACGTGCTTGAGAGGCCAGAGCATTCG:ATCCACGTGCTTGAGAGGCCAGAGCATTCG_8_GTGGCCGATGTTTCGCATCGGCGTACGACT",
+  "threadnum": 32,
+  "steps": 7,
+  "outputfolder": "/path/to/astro_out/",
+  "gtffile": "/path/to/host_plus_bac.gtf",
+  "starref": "/path/to/STAR_index/",
+  "options": "H"
+}
