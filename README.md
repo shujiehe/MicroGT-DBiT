@@ -85,4 +85,4 @@ See each subdirectory's README for module-specific instructions. Test data is pr
 
 ## Citation
 
-If you use MicroGT-DBiT in your research, please cite the associated publication (see `Read Me.docx` for details).
+Pending
