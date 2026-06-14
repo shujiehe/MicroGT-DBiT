@@ -1,6 +1,6 @@
 # RNA_analysis
 
-This module processes spatially-barcoded RNA sequencing data from DBiT experiments. It decodes dual spatial barcodes, extracts UMIs, aligns transcripts to a combined host-plus-bacterial genome, and generates a UMI-deduplicated gene-by-spot expression matrix.
+This module processes spatially-barcoded RNA sequencing data from MicroGT-DBiT experiments. It decodes dual spatial barcodes, extracts UMIs, aligns transcripts to a combined host-plus-bacterial genome, and generates a UMI-deduplicated gene-by-spot expression matrix.
 
 ## Pipeline Overview
 

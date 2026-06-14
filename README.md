@@ -1,12 +1,12 @@
 # MicroGT-DBiT
 
-**MicroGT-DBiT** is a spatial metagenomics pipeline for mapping microbial communities across tissue coordinates using [DBiT (Deterministic Barcoding in Tissue)](https://www.nature.com/articles/s41586-020-2892-8) sequencing technology. It processes spatially-barcoded DNA and RNA sequencing data to generate spatially-resolved abundance profiles of bacterial species and detect strain-level genetic variation.
+**MicroGT-DBiT** is a spatial metagenomics pipeline for mapping microbial communities across tissue coordinates. It processes spatially-barcoded DNA and RNA sequencing data to generate spatially-resolved abundance profiles of bacterial species and detect strain-level genetic variation.
 
 ## Overview
 
 ![Pipeline Scheme](scheme.png)
 
-DBiT-seq applies a grid of spatial barcodes to tissue sections before sequencing. MicroGT-DBiT decodes those barcodes, maps reads to microbial reference genomes, and produces feature-by-spot matrices analogous to spatial transcriptomics outputs — but for the microbiome.
+MicroGT-DBiT applies a grid of spatial barcodes to tissue sections before sequencing, then decodes those barcodes, maps reads to microbial reference genomes, and produces feature-by-spot matrices analogous to spatial transcriptomics outputs — but for the microbiome.
 
 **Key capabilities:**
 - Spatially-resolved bacterial species quantification (DNA and RNA)

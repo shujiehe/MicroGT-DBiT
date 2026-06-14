@@ -1,6 +1,6 @@
 # DNA_analysis
 
-This module processes spatially-barcoded DNA sequencing data from DBiT experiments. It decodes spatial barcodes from R2 reads, maps the resulting reads to a bacterial reference genome, and produces a contig-by-spot abundance matrix.
+This module processes spatially-barcoded DNA sequencing data from MicroGT-DBiT experiments. It decodes spatial barcodes from R2 reads, maps the resulting reads to a bacterial reference genome, and produces a contig-by-spot abundance matrix.
 
 ## Pipeline Overview
 
