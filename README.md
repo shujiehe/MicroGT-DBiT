@@ -4,6 +4,8 @@
 
 ## Overview
 
+![Pipeline Scheme](scheme.png)
+
 DBiT-seq applies a grid of spatial barcodes to tissue sections before sequencing. MicroGT-DBiT decodes those barcodes, maps reads to microbial reference genomes, and produces feature-by-spot matrices analogous to spatial transcriptomics outputs — but for the microbiome.
 
 **Key capabilities:**
