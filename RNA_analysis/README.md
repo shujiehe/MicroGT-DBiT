@@ -10,7 +10,7 @@ R1 (transcript reads) + R2 (spatial barcodes + UMI)
         ▼
 ASTRO (configured via RNA_parameter.json)
    ├── Barcode decoding  (8bp + linker + linker + 8bp structure)
-   ├── UMI extraction    (24 bp fixed anchor + 10 bp random UMI)
+   ├── UMI extraction    (22 bp fixed anchor + 10 bp random UMI)
    ├── STAR alignment    (host_plus_bac GTF)
    └── UMI deduplication
         │
@@ -32,7 +32,7 @@ Key fields:
 | `R1` | Path to transcript read FASTQ (R1) |
 | `R2` | Path to barcode/UMI read FASTQ (R2) |
 | `spatial_barcodes` | Path to `spatial_barcodes.txt` whitelist |
-| `UMI_structure` | `CAAGCGTTGGCTTCTCGCATCT_10` — 24 bp fixed anchor + 10 bp random UMI |
+| `UMI_structure` | `CAAGCGTTGGCTTCTCGCATCT_10` — 22 bp fixed anchor + 10 bp random UMI |
 | `barcode_structure` | `8bp_LINKER_LINKER_8bp_LINKER` — dual 8 bp barcodes with flanking linkers |
 | `GTF` | Combined host + bacterial annotation file (`host_plus_bac.gtf`) |
 | `STAR_index` | Path to STAR genome index directory |
