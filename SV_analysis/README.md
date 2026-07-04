@@ -67,7 +67,7 @@ bash run_sgvfinder2.sh
 | File | Description |
 |------|-------------|
 | `variable_sgv.pkl` | Python pickle: table of variable coverage SV regions |
-| `deletion_sgv.pkl` | Python pickle: table of high-confidence deletion SVs |
+| `deletion_sgv.pkl` | Python pickle: table of high-confidence deletion SV regions |
 | Per-sample map files | Intermediate depth/delta-depth files (one per sample) |
 
 Loading output in Python:
