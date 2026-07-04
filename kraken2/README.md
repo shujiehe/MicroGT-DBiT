@@ -57,6 +57,8 @@ Edit the scripts to set paths for your host genome, Kraken2 database, and input 
 
 ## Output Files
 
+| File | Description |
+|------|-------------|
 | `std.report` | Kraken2 report: per-taxon read counts and percentages |
 | Host-depleted FASTQ | Temporary host-depleted R1 FASTQ generated from BWA-MEM2-unmapped reads; removed after Kraken2 classification |
 
