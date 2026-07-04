@@ -69,6 +69,7 @@ Edit the scripts to set paths for your host genome, Kraken2 database, and input 
 - Kraken2 (with a built database, e.g., standard)
 - SLURM workload manager (for `.sbatch` submission)
 
+
 ## RNA Pipeline Overview
 
 ```
