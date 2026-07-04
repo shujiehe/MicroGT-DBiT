@@ -75,4 +75,4 @@ ASTRO RNA_parameter.json
 ## Notes
 
 - Sample names in the test data (e.g., `P.Colon`, `D.Colon`, `DSS_Colon`) reflect colon tissue sections from a murine model — these are example labels and not required by the pipeline.
-- A pre-built reference genome and Bowtie2/BWA-MEM2 index are required separately and are not included here due to file size.
+- A pre-built reference genome and Bowtie2/BWA-MEM2/STAR index are required separately and are not included here due to file size.
