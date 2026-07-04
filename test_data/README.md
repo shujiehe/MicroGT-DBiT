@@ -25,8 +25,8 @@ AACGTGATAACGTGAT       50   1
 ...
 ```
 
-- ~768 barcodes arranged in a 48 × 16 spatial grid
-- Used by `DNA_analysis/demultiplexer.py` and `SNV_analysis/decode_r2_barcode_to_spot.py`
+- 2500 barcodes arranged in a 50 × 50 spatial grid
+- Used by `DNA_analysis/demultiplexer.py`, `RNA_analysis/RNA_parameter.json` and `SNV_analysis/decode_r2_barcode_to_spot.py`
 
 ### `position/position.txt`
 List of tissue spot coordinates to retain after demultiplexing. Spots not in this file are discarded, allowing analysis to be restricted to tissue-covered regions.
