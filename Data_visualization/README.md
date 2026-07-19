@@ -29,11 +29,11 @@ Rscript species_spatial_plot.R \
 Tests whether pairs of bacterial species co-occur more (or less) than expected by chance, using a null model randomization approach.
 
 **What it does:**
-- Loads the species-by-spot presence/absence or abundance matrix
-- Computes pairwise co-occurrence statistics between all species pairs
-- Runs EcoSimR null model randomization (N_SWAPS = 25,000 swap iterations, N_NULL = 50 null communities)
-- Applies FDR correction to p-values
-- Outputs heatmaps of pairwise colocalization scores and significance
+- Loads a species-by-spot count matrix and converts it into a binary presence/absence matrix
+- Computes pairwise species co-localization using Jaccard similarity/distance
+- Runs EcoSimR SIM9 null model randomization (N_SWAPS = 25,000 swap iterations, N_NULL = 50 null communities)
+- Computes Z-scores, p-values, and FDR-adjusted p-values
+- Outputs pairwise result tables and top-species Z-score heatmaps
 
 **Key parameters (editable at top of script):**
 
