@@ -76,7 +76,7 @@ ASTRO RNA_parameter.json
 
 | File | Description |
 |------|-------------|
-| `matrix.mtx` / `barcodes.tsv` / `features.tsv` | Sparse gene × spot count matrix (10x-compatible format) |
+| `expmat.tsv` | Gene × spot count matrix |
 | STAR alignment BAM | Aligned reads with spatial barcode tags |
 | Log files | Per-step processing statistics |
 
