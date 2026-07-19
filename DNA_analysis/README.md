@@ -82,7 +82,7 @@ bash run_spatial_dna_pipeline.sh
 
 | File | Description |
 |------|-------------|
-| `*_R1.fastq.gz` | Read 1 — DNA fragment reads (non-host depleted) |
+| `*_R1.fastq.gz` | Read 1 — DNA fragment reads (host depleted) |
 | `*_R2.fastq.gz` | Read 2 — contains spatial barcodes (B + linker + A) |
 | `spatial_barcodes.txt` | Whitelist: `BARCODE_B+BARCODE_A  X  Y` |
 | Reference FASTA | Bacterial reference genome/contigs for mapping |
