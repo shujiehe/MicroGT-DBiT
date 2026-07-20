@@ -48,10 +48,10 @@ sorted BAM  ──►  inStrain profile
 ### `decode_r2_barcode_to_spot.py`
 Extracts spatial barcodes from R2 reads and maps each read to a tissue spot.
 
-- Reads barcode B (positions 32–40) and barcode A (positions 70–78) from R2
-- Looks up the B+A combination in the barcode-map CSV to get (X, Y) coordinates
-- Filters out spots not listed in the position file
-- Outputs a gzipped TSV mapping read name → spot: `qname_to_spot.tsv.gz`
+- Reads barcode B (positions 33–40: 8bp) and barcode A (positions 71–78: 8bp) from R2
+- Combines barcode B + barcode A and matches it to the spatial barcode whitelist
+- Keeps only spots listed in the position file
+- Outputs a gzipped read-to-spot table: `qname_to_spot.tsv.gz`
 
 **Usage:**
 ```bash
@@ -59,22 +59,23 @@ python decode_r2_barcode_to_spot.py \
   --r2 <R2.fastq.gz> \
   --barcode-map <barcode_map.csv> \
   --position <position.txt> \
-  --output qname_to_spot.tsv.gz
+  --out qname_to_spot.tsv.gz
 ```
 
 ### `tag_sam_with_spot.py`
 Tags SAM records with their spatial spot using the mapping produced by `decode_r2_barcode_to_spot.py`.
 
-- Reads SAM lines from stdin
-- Looks up each read name in `qname_to_spot.tsv.gz`
-- Appends a `ZS:Z:<spot>` tag to matched alignments
-- Discards reads without a spot assignment
+- Reads SAM records from stdin
+- Reads `qname_to_spot.tsv.gz` in the same read order
+- Appends a `ZS:Z:<spot>` tag to records with `status=OK`
+- Discards reads with failed or ambiguous barcode assignments
+- Requires the SAM stream and qname-to-spot table to have the same read order
 - Bowtie2 must be run with `--reorder` to preserve read order for streaming
 
 **Usage (as part of Bowtie2 pipe):**
 ```bash
 bowtie2 --reorder -x <index> -U <R1.fastq.gz> \
-  | python tag_sam_with_spot.py --spot-map qname_to_spot.tsv.gz \
+  | python tag_sam_with_spot.py --map qname_to_spot.tsv.gz \
   | samtools sort -o bacteria.R1.bowtie2.sorted.bam
 ```
 
@@ -94,18 +95,22 @@ Key parameters:
 |-----------|-------|-------------|
 | `--min_mapq` | 40 | Minimum mapping quality |
 | `--min_read_ani` | 0.92 | Minimum average nucleotide identity per read |
-| `--min_coverage` | 5 | Minimum coverage depth to call variants |
+| `--min_coverage` | 5 | Minimum coverage depth for SNV profiling |
 
 **Usage:**
 ```bash
 inStrain profile \
-  <sorted.bam> \
-  <reference.fasta> \
+  <sorted.bam> <reference.fasta> \
   -o <output_dir> \
-  -s <strain_table.stb> \
+  -p 16 \
+  --pairing_filter all_reads \
+  --stb <contig_to_species.stb> \
   --min_mapq 40 \
   --min_read_ani 0.92 \
-  --min_coverage 5
+  --min_cov 5 \
+  --min_freq 0.05 \
+  --fdr 1e-6 \
+  --skip_mm_profiling
 ```
 
 ---
@@ -116,19 +121,19 @@ inStrain profile \
 |------|-------------|
 | `*_R1.fastq.gz` | Read 1 — sequencing reads for alignment |
 | `*_R2.fastq.gz` | Read 2 — contains spatial barcodes (Workflow 1 only) |
-| `barcode_map.csv` | Barcode-to-coordinate mapping CSV |
-| `position.txt` | Valid tissue spot coordinates |
-| Bowtie2 index | Pre-built Bowtie2 reference index |
-| Reference FASTA | Bacterial reference genome |
-| `*.stb` | Strain table for inStrain (contig → genome assignment) |
+| `barcode_map.csv` | Barcode-to-coordinate mapping CSV (Workflow 1 only) |
+| `position.txt` | Valid tissue spot coordinates (Workflow 1 only) |
+| Bowtie2 index | Pre-built Bowtie2 index for the bacterial reference |
+| Reference FASTA | Bacterial reference genome used by inStrain profiling |
+| `*.stb` | Contig-to-species mapping file used by inStrain |
 
 ## Output Files
 
 | File | Description |
 |------|-------------|
-| `qname_to_spot.tsv.gz` | Read name → spot coordinate mapping |
-| `*.bowtie2.sorted.bam` | Sorted BAM with `ZS:Z:<spot>` spatial tags |
-| inStrain output directory | SNV tables, coverage, microdiversity metrics |
+| `qname_to_spot.tsv.gz` | Read-to-spot mapping table generated from R2 barcode decoding (Workflow 1 only) |
+| `*.bowtie2.sorted.bam` | Sorted BAM file from Bowtie2 alignment; contains `ZS:Z:<spot>` spatial tags in Workflow 1 |
+| inStrain output directory | inStrain profiling results, including SNV tables, coverage, and species-level microdiversity metrics |
 
 ## Dependencies
 
