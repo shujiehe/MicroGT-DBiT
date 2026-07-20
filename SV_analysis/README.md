@@ -13,8 +13,8 @@ run_sgvfinder2_pipeline.py
    └── Collection:  Cross-sample SV calling
         │
         ▼
-variable_sgv.pkl   (variable coverage regions)
-deletion_sgv.pkl   (high-confidence deletions)
+variable_sgv.pkl   (variable-coverage SV regions)
+deletion_sgv.pkl   (high-confidence deletion SV regions)
 ```
 
 ## Scripts
@@ -34,17 +34,20 @@ Key parameters:
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `sensitivity` | — | SGVFinder2 sensitivity setting |
+| `sensitivity` | very-sensitive | Bowtie2 sensitivity setting used by SGVFinder2 |
 | `max_spacing` | 10 | Maximum gap between positions in an SV region |
-| `del_detect_thresh` | 0.25 | Depth threshold fraction for deletion detection |
+| `dels_detect_thresh` | 0.25 | Depth threshold fraction for deletion detection |
 
 **Usage:**
 ```bash
 python run_sgvfinder2_pipeline.py \
-  --input-dir <fastq_dir> \
-  --bowtie2-index <index> \
-  --output-dir <output_dir> \
-  --threads <N>
+  --db_prefix <sgvfinder2_database_prefix> \
+  --fastq_dir <fastq_dir> \
+  --icra_root <output_dir>/icra \
+  --smp_dir <output_dir>/smp \
+  --final_dir <output_dir>/final \
+  --min_samp_cutoff 2 \
+  --write_csv
 ```
 
 ### `run_sgvfinder2.sh`
@@ -60,7 +63,7 @@ bash run_sgvfinder2.sh
 | File | Description |
 |------|-------------|
 | `*_R1.fastq.gz` | Read 1 FASTQ files (one per sample) |
-| Bowtie2 index | Pre-built reference index for bacterial genome(s) |
+| SGVFinder2 database prefix | Pre-built SGVFinder2 database prefix for bacterial genome(s) |
 
 ## Output Files
 
@@ -72,15 +75,12 @@ bash run_sgvfinder2.sh
 
 Loading output in Python:
 ```python
-import pickle
-with open("variable_sgv.pkl", "rb") as f:
-    variable_svs = pickle.load(f)
-with open("deletion_sgv.pkl", "rb") as f:
-    deletion_svs = pickle.load(f)
+import pandas as pd
+variable_sgv = pd.read_pickle("variable_sgv.pkl")
+deletion_sgv = pd.read_pickle("deletion_sgv.pkl")
 ```
 
 ## Dependencies
 
 - Python 3 with `sgvfinder2`, `pandas`
 - Bowtie2
-- samtools
