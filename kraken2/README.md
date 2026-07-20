@@ -26,9 +26,9 @@ std.report  (taxonomic classification report)
 SLURM batch script for taxonomic classification of **DNA** reads.
 
 Steps:
-1. Aligns reads to the host genome using BWA-MEM2
-2. Extracts only unmapped reads (non-host reads) with samtools
-3. Runs Kraken2 on the host-depleted reads
+1. Aligns R1 reads to the host genome using BWA-MEM2
+2. Uses samtools to keep unmapped reads as non-host reads
+3. Runs Kraken2 on the host-depleted R1 reads
 
 Kraken2 parameters:
 
@@ -50,7 +50,7 @@ Edit the scripts to set paths for your host genome, Kraken2 database, and input 
 
 | File | Description |
 |------|-------------|
-| `*_R1.fastq.gz` | Read 1 containing genomic sequences from raw paired-end sequencing reads |
+| `*_R1.fastq.gz` | DNA R1 FASTQ file used for host depletion and Kraken2 classification |
 | Host genome FASTA | Reference genome for host depletion (e.g., mouse or human) |
 | BWA-MEM2 index | Pre-built index of the host genome |
 | Kraken2 database | Standard or custom Kraken2 database directory |
@@ -94,9 +94,9 @@ std.report  (taxonomic classification report)
 SLURM batch script for taxonomic classification of **RNA** reads.
 
 Steps:
-1. Aligns reads to the host genome using STAR
+1. Aligns trimmed R1 reads to the host genome using STAR
 2. Keeps STAR-unmapped reads as host-depleted reads
-3. Runs Kraken2 on the host-depleted reads
+3. Runs Kraken2 on the host-depleted R1 reads
 
 Kraken2 parameters:
 
@@ -118,8 +118,7 @@ Edit the scripts to set paths for your host genome, Kraken2 database, and input 
 
 | File | Description |
 |------|-------------|
-| `*_R1.trim.fastq.gz` | Read 1 containing genomic sequences from raw paired-end sequencing reads |
-| Host genome FASTA | Reference genome for host depletion (e.g., mouse or human) |
+| `*_R1.trim.fastq.gz` | Trimmed RNA R1 FASTQ file used for host depletion and Kraken2 classification |
 | STAR index | Pre-built index of the host genome |
 | Kraken2 database | Standard or custom Kraken2 database directory |
 
